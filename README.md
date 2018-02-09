@@ -3,7 +3,14 @@
 
 目前只有android的版本并且，API调用没有完善还在进行中。
 
- 
+## 如何配置 
+
+>设置高德Key在根目录plugin.xml value替换为你的Key
+```xml
+<meta-data android:name="com.amap.api.v2.apikey" android:value="c589d3febc9665e14592985633391399"/>
+```
+
+## 如何调用
 >cordova中调用Demo的方式 
 
 ```javascript
