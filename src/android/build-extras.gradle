@@ -1,0 +1,10 @@
+android {
+    sourceSets{
+        main{
+            jniLibs.srcDirs=['libs']
+        }
+    }
+}
+dependencies {
+    api files('libs/Android_Map3D_SDK_V5.7.0_20171229.jar')
+}

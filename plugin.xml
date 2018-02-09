@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-namap" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>namap</name>
+    <js-module name="namap" src="www/namap.js">
+        <clobbers target="cordova_plugins_namap" />
+    </js-module>
+
+    <!--platform：支持的平台-->  
+    <platform name="android">  
+    <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+    <!--插件的配置信息，build的时候会添加到res/xml/config.xml 文件中-->  
+        <config-file parent="/*" target="res/xml/config.xml">  
+            <feature name="NAmap">  
+                <param name="android-package" value="com.lenlee.plugin.namap.NAmap"/>  
+            </feature>
+            <feature name="PluginUtil">  
+                <param name="android-package" value="com.lenlee.plugin.namap.PluginUtil"/>  
+            </feature>
+            <feature name="AmapUtil">  
+                <param name="android-package" value="com.lenlee.plugin.namap.AmapUtil"/>  
+            </feature>       
+        </config-file>
+        <!-- 可以定义自己的一些权限信息，build后会添加到主配置文件中 -->  
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> 
+            <!--允许程序打开网络套接字-->
+            <uses-permission android:name="android.permission.INTERNET" />  
+            <!--允许程序设置内置sd卡的写权限-->
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
+            <!--允许程序获取网络状态-->
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+            <!--允许程序访问WiFi网络信息-->
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> 
+            <!--允许程序读写手机状态和身份-->
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />     
+            <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />             
+        </config-file>  
+        <!-- 高德KEY -->
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <meta-data android:name="com.amap.api.v2.apikey" android:value="c589d3febc9665e14592985633391399"/>
+        </config-file>
+
+        <source-file src="src/android/NAmap.java" target-dir="src/com/lenlee/plugin/namap"/> 
+        <source-file src="src/android/PluginUtil.java" target-dir="src/com/lenlee/plugin/namap"/>
+        <source-file src="src/android/AmapUtil.java" target-dir="src/com/lenlee/plugin/namap"/>
+            <!-- 插件的libs区域 -->
+        <lib-file src="src/android/libs/arm64-v8a" arch="device" />
+        <lib-file src="src/android/libs/armeabi" arch="device" />
+        <lib-file src="src/android/libs/armeabi-v7a" arch="device" />
+        <lib-file src="src/android/libs/x86" arch="device" />
+        <lib-file src="src/android/libs/x86_64" arch="device" />
+        <lib-file src="src/android/libs/Android_Map3D_SDK_V5.7.0_20171229.jar"/>
+
+        <!-- 高德的xml文件 -->
+        <resource-file src='src/android/res/amap_activity_main.xml' target="res/layout/amap_activity_main.xml"/>
+    </platform>
+</plugin>
